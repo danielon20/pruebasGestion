@@ -1,0 +1,25 @@
+{
+  "name": "webgitapi",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "set PORT=3002 & nodemon ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.1.1",
+    "mongoose": "^5.13.7",
+    "morgan": "~1.9.1",
+    "mysql2": "^2.3.0",
+    "nodemailer": "^6.6.3",
+    "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
