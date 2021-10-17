@@ -5,8 +5,8 @@ const mailTransporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: 'team.webgit@gmail.com',
-        pass: 'mbblggifsakpgvwj'
+        user: 'drvz2258920@gmail.com',
+            pass: 'evnphwhiwemqymct'
     }
 });
 

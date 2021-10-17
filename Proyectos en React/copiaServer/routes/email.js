@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-//const mailTransporter = require('../config/mailer');
 var nodemailer = require('nodemailer');
 
 
@@ -9,28 +8,26 @@ router.post('/', function(req, res, next) {
     //let mail_user = req.body.mail;
     let name_user = req.body.name;
     var n_aleatorio = Math.floor(Math.random() * (999999-100000)) + 100000;
-var filename = "thecodes.json"
-var dict = {"verficacionPIN" : n_aleatorio};
-var dictstring = JSON.stringify(dict);
-    var fs = require('fs');
-     fs.writeFile(`./public/datos/${filename}`, dictstring, function(err, result) {
-        if(err) console.log('error', err);
-    });
-   
-    //et mensaje_user = req.body.messa;
+    if (typeof localStorage === "undefined" || localStorage === null) {
+        var LocalStorage = require('node-localstorage').LocalStorage;
+        localStorage = new LocalStorage('./scratch');
+      }
+      
+      localStorage.setItem('myFirstKey', n_aleatorio);
+      console.log(localStorage.getItem('myFirstKey'));
 
     const mailTransporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
         secure: true,
         auth: {
-            user: 'team.webgit@gmail.com',
-            pass: 'mbblggifsakpgvwj'
+            user: 'drvz2258920@gmail.com',
+            pass: 'evnphwhiwemqymct'
         }
     });
     //tomdbelt@espol.edu.ec,darinka.townsend@hotmail.com,rjvillao@espol.edu.ec
     let mailDetails = {
-        from: 'team.webgit@gmail.com',
+        from: 'drvz2258920@gmail.com',
         to: 'danielviscarraz@hotmail.com',
         subject: 'Nuevo Contacto Recibido',
         html: 
@@ -77,6 +74,7 @@ var dictstring = JSON.stringify(dict);
             console.log('Error Occurs');
         } else {
             console.log('Email sent: ' + data.response);
+
         }
     });
 
