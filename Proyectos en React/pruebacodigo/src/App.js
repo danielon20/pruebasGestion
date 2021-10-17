@@ -1,5 +1,5 @@
 //import logo from './logo.svg';
-import { Await } from 'react-await';
+//import { Await } from 'react-await';
 import './App.css';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
     alert("codigo enviado")
     console.log("hola")
 
-    let correoDetalle =  fetch("http://localhost:3002/email",{
+    fetch("http://localhost:3002/email",{
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -20,6 +20,28 @@ function App() {
         })
       })
   }
+
+  const onClickVerificar = function (evento) {
+    //alert("codigo enviado")
+    //console.log("hola")
+    let c = document.getElementById('elcode').value;
+    console.log(c);
+    fetch("http://localhost:3002/verificacion",{
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          code: c
+        })
+      })
+      .then(res => res.json())
+      .then(mensaje => {
+        console.log(mensaje.message)
+        document.getElementById('Elmensaje').textContent=mensaje.message;
+      })
+     
+    
+  }
+
   return (
     <div className="App">
  
@@ -29,10 +51,12 @@ function App() {
         <div>
           <p>Codigo de verificacion:</p>
           
-          <input type="text" placeholder="ingrese su codigo" /> <br />
+          <input type="text" id="elcode" placeholder="ingrese su codigo" /> <br />
         </div>
         <button onClick={onClickEnviar}>Probar</button>
-        <button>Verificar</button>
+        <button onClick={onClickVerificar}>Verificar</button>
+        <p id='Elmensaje'></p>
+        
       
     </div>
   );
