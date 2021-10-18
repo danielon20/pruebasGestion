@@ -14,7 +14,7 @@ router.post('/', function(req, res, next) {
       }
       
       localStorage.setItem('myFirstKey', n_aleatorio);
-      console.log(localStorage.getItem('myFirstKey'));
+      //console.log(localStorage.getItem('myFirstKey'));
 
     const mailTransporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',

@@ -18,13 +18,13 @@ router.get('/', verificacionController.list);
 //router.post('/', verificacionController.crear);
 router.post('/', function(req, res, next) {
     let codigoV = req.body.code;
-    console.log(codigoV);
-    console.log(localStorage.getItem('myFirstKey'));
+    //console.log(codigoV);
+    //console.log(localStorage.getItem('myFirstKey'));
     if (codigoV==localStorage.getItem('myFirstKey')){
-        res.json({message : 'Se ha verificado que es usted! Su contraseña es: xxxxxxxxxxxxxx'});
+        res.json({verification: 1,message : 'Se ha verificado que es usted!', message2 : 'Su contraseña es: xxxxxxxxxxxxxx'});
     }
     else{
-        res.json({message : 'Clave de verificacion incorrecta!'});
+        res.json({verification: 0,message : 'Clave de verificacion incorrecta!'});
     }        
 });
     

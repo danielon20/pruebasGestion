@@ -35,8 +35,19 @@ function App() {
       })
       .then(res => res.json())
       .then(mensaje => {
-        console.log(mensaje.message)
-        document.getElementById('Elmensaje').textContent=mensaje.message;
+        if(mensaje.verification==1){
+          //console.log(mensaje.message);
+          //console.log(mensaje.message2);
+          document.getElementById('Elmensaje').textContent=mensaje.message;
+          document.getElementById('Elmensaje2').textContent=mensaje.message2;
+        }
+        else{
+          document.getElementById('Elmensaje').textContent=mensaje.message;
+          document.getElementById('Elmensaje2').textContent='';
+          //console.log(mensaje.verification);
+        }
+        //console.log(mensaje.message)
+        
       })
      
     
@@ -46,16 +57,18 @@ function App() {
     <div className="App">
  
         <p>
-          Numero aleatorio : ****** <br />
+          Pequeño proyecto de codigo de verificacion de usuario <br />
         </p>
+        <button onClick={onClickEnviar}>Probar</button>
         <div>
           <p>Codigo de verificacion:</p>
           
           <input type="text" id="elcode" placeholder="ingrese su codigo" /> <br />
         </div>
-        <button onClick={onClickEnviar}>Probar</button>
+        
         <button onClick={onClickVerificar}>Verificar</button>
         <p id='Elmensaje'></p>
+        <p id='Elmensaje2'></p>
         
       
     </div>
