@@ -3,17 +3,40 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 
 
+function setLocalStorage(key, value) {
+    var curtime = new Date ().getTime(); // Obtener la hora actual y convertir a secuencia de cadena JSON 
+        var valueDate = JSON.stringify({
+            val: value,
+            timer: curtime
+        });
+        if (typeof localStorage === "undefined" || localStorage === null) {
+            var LocalStorage = require('node-localstorage').LocalStorage;
+            localStorage = new LocalStorage('./scratch');
+        }
+        localStorage.setItem(key, valueDate);
+   
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.post('/', function(req, res, next) {
     console.log("Llega al post de mail")
     //let mail_user = req.body.mail;
     let name_user = req.body.name;
     var n_aleatorio = Math.floor(Math.random() * (999999-100000)) + 100000;
-    if (typeof localStorage === "undefined" || localStorage === null) {
-        var LocalStorage = require('node-localstorage').LocalStorage;
-        localStorage = new LocalStorage('./scratch');
-      }
+    setLocalStorage('MyFirstKey',n_aleatorio);
       
-      localStorage.setItem('myFirstKey', n_aleatorio);
+     
       //console.log(localStorage.getItem('myFirstKey'));
 
     const mailTransporter = nodemailer.createTransport({
@@ -74,7 +97,9 @@ router.post('/', function(req, res, next) {
             console.log('Error Occurs');
         } else {
             console.log('Email sent: ' + data.response);
-
+            //var vals = localStorage.getItem ('MyFirstKey'); // Obtener el valor del almacenamiento local 
+            //var dataObj = JSON.parse (vals);
+            //console.log(dataObj.val)
         }
     });
 
