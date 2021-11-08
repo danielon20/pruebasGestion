@@ -12,46 +12,49 @@ function App() {
     alert("codigo enviado")
     console.log("hola")
 
-    fetch("http://localhost:3002/email",{
-        method: "POST",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          name:"dani365XD"
-        })
+    fetch("https://localhost:5001/api/todoverification",{
+      method: "POST",
+      headers: { 
+        'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        name: "joshua1XD"
       })
+    })
+    .then(res => res.text())
+    .then(mensaje => console.log(mensaje));
+
   }
 
+  
   const onClickVerificar = function (evento) {
     //alert("codigo enviado")
     //console.log("hola")
     let c = document.getElementById('elcode').value;
     console.log(c);
-    fetch("http://localhost:3002/verificacion",{
+    fetch("https://localhost:5001/api/todocomprobacion",{
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          code: c
+          code: c,
+          numberi: "1"
         })
       })
-      .then(res => res.json())
+      .then(res => res.text())
       .then(mensaje => {
-        if(mensaje.verification==1){
+        
           //console.log(mensaje.message);
           //console.log(mensaje.message2);
-          document.getElementById('Elmensaje').textContent=mensaje.message;
-          document.getElementById('Elmensaje2').textContent=mensaje.message2;
-        }
-        else{
-          document.getElementById('Elmensaje').textContent=mensaje.message;
-          document.getElementById('Elmensaje2').textContent='';
+          document.getElementById('Elmensaje').textContent=mensaje;
+          
           //console.log(mensaje.verification);
-        }
+        
         //console.log(mensaje.message)
         
       })
      
     
   }
+  
 
   return (
     <div className="App">
@@ -68,7 +71,7 @@ function App() {
         
         <button onClick={onClickVerificar}>Verificar</button>
         <p id='Elmensaje'></p>
-        <p id='Elmensaje2'></p>
+        
         
       
     </div>
